@@ -1,0 +1,174 @@
+这里研究的对象是 MaxtoCode 3.1试用版.这里只探讨程序代码的加密.
+
+ 
+
+对.Net程序代码的加密过程如下:
+
+1. 运行 ildasm 将程序集反编译成 il代码文件.
+
+2. 对IL代码文件进行处理.(*)
+
+3. 运行 ilasm 将 IL代码文件编译成程序文件.
+
+4. 直接对程序文件中的il字节码加密.(**)
+
+ 
+
+粗体表示的 2 , 4 是关键步骤. 
+
+我们先来看看第四步.这一步就是加密的关键步骤，这里就是使用MaxtoCode的加密算法对程序代码进行加密。
+
+显然，对于破解来说最直接直观的方法就是对其第四步的逆向解密。
+
+如果从这个方向去破解解密加密过的程序，那就像MaxtoCode号称的那样MAXTOCODE的强度建立在加密算法之上。
+
+理论上方法是可行的，但是工作量是非常大的。
+
+ 
+
+那么我们还有其它的路可行呢？
+
+现在来看看第二步MaxtoCode都做了什么。
+
+用vs2003建一个最简单的winform程序，然后用MaxtoCode加密试试。我们将第三步之后，第四步之前的exe文件拿来研究。这个时候的exe程序代码是还没有被加密的。可以reflector。
+
+看看 这个exe和我们直接的exe有什么区别：
+
+1． 增加了一个类InFaceMaxtoCode .
+
+2． 类都被增加了一个静态构造函数，在这个函数里面调用了InFaceMaxtoCode的一个静态函数Startup。
+
+3． 类的原有构造函数里面也增加了调用InFaceMaxtoCode.Startup的语句。
+
+从这些来看，MaxtoCode的目的是要确保InFaceMaxtoCode.Startup 在程序中能够最早的运行。
+
+这个行为和win32程序加壳很像，一般壳都是加密程序代码，然后修改程序的启动入口，首先执行壳的代码，完成程序的解密，然后再执行程序。一般壳有一个特点：加密是对整个程序，启动时也是整个程序完全解密，然后再执行。(我也见到过一个很特别的壳，程序是部分解密的，软件注册算法的那一块， 是执行一部分解密一部分，然后之前解密的又被垃圾信息填充了。)
+
+对于壳只要我们找对了时间和地点，就能从内存中得到我们需要的东西。
+
+那么 MaxtoCode加密后的。Net程序呢？
+
+先来看看 MaxtoCode的加密方式。用ildasm反编译 加密后的程序，会报很多错误，这是正常的，从生产的IL文件看，各个类，函数都还在，只是函数体里面是只有ildasm的错误信息。显然是加密后的代码无法反编译。MaxtoCode对。Net程序的加密不是对程序整体的，而只是对函数体加密，程序类结构不变。有一点我们是很清楚的，
+加密后的程序要能够正常运行，在运行时肯定是需要解密的。而解密的关键就在InFaceMaxtoCode.Startup 里面。
+
+现在我们来看看InFaceMaxtoCode.Startup 里面究竟做了什么。InFaceMaxtoCode 类的代码如下：
+
+ 
+
+ 
+
+using System;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+
+public class InFaceMaxtoCode
+{
+    static InFaceMaxtoCode()
+    {
+        InFaceMaxtoCode.started = false;
+    }
+
+    [DllImport("MRuntime3.dll", EntryPoint="CheckRuntime", CharSet=CharSet.Unicode, SetLastError=true, ExactSpelling=true)]
+    private static extern int A______();
+    [DllImport("KERNEL32.DLL", EntryPoint="GetModuleHandleA", CharSet=CharSet.Ansi, SetLastError=true, ExactSpelling=true)]
+    private static extern int B______(string x13d52f7d8e232e61);
+    private static string ByteToString(byte[] x5fc6100148519126)
+    {
+        return Encoding.ASCII.GetString(x5fc6100148519126);
+    }
+
+    [DllImport("MRuntime3.dll", EntryPoint="MainDLL", CharSet=CharSet.Ansi, SetLastError=true, ExactSpelling=true)]
+    private static extern bool C______(int x19218ffab70283ef, int xe7ebe10fa44d8d49);
+    [DllImport("KERNEL32.DLL", EntryPoint="SetEnvironmentVariableA", CharSet=CharSet.Ansi, SetLastError=true, ExactSpelling=true)]
+    private static extern bool D______(string x427bb0e14ed9e9b1, string x84ee6c5b88919f4c);
+    public static void Startup()
+    {
+        if (!InFaceMaxtoCode.started)
+        {
+            string text1 = "";
+            string text2 = "MRuntime3.dll";
+            if (AppDomain.CurrentDomain.RelativeSearchPath != null)
+            {
+                if (AppDomain.CurrentDomain.RelativeSearchPath.IndexOf(@":\") != -1)
+                {
+                    text1 = AppDomain.CurrentDomain.RelativeSearchPath;
+                }
+                else
+                {
+                    text1 = AppDomain.CurrentDomain.BaseDirectory + AppDomain.CurrentDomain.RelativeSearchPath;
+                }
+            }
+            else
+            {
+                text1 = AppDomain.CurrentDomain.BaseDirectory;
+            }
+            string text3 = Environment.GetEnvironmentVariable("path");
+            if (text3.IndexOf(text1) == -1)
+            {
+                InFaceMaxtoCode.D______("path", text3 + ";" + text1.Replace("/", @"\"));
+            }
+            if (text1.Substring(text1.Length - 1, 1) == @"\")
+            {
+                text1 = text1;
+            }
+            else
+            {
+                text1 = text1 + @"\";
+            }
+            if (File.Exists(text1 + text2) && !File.Exists(Path.GetTempPath() + text2))
+            {
+                File.Copy(text1 + text2, Path.GetTempPath() + text2);
+            }
+            if (text3.IndexOf(Path.GetTempPath()) == -1)
+            {
+                InFaceMaxtoCode.D______("path", text3 + ";" + Path.GetTempPath().Replace("/", @"\"));
+            }
+            int num1 = 5;
+            num1 = InFaceMaxtoCode.A______();
+            if (num1 == 0)
+            {
+                int num2 = InFaceMaxtoCode.B______(text2);
+                int num3 = InFaceMaxtoCode.B______(Assembly.GetExecutingAssembly().Location);
+                InFaceMaxtoCode.started = InFaceMaxtoCode.C______(num2, num3);
+            }
+            else
+            {
+                //一堆垃圾代码，报告启动错误信息的。
+            }
+        }
+    }
+
+
+    private static bool started;
+}
+
+
+Startup精简后的代码如下：
+public static void Startup()
+        {
+        if (!InFaceMaxtoCode.started)
+        {
+            //准备运行库；
+            int num1 = 5;
+            num1 = InFaceMaxtoCode.A______();
+            if (num1 == 0)
+            {
+                int num2 = InFaceMaxtoCode.B______(text2);
+                int num3 = InFaceMaxtoCode.B______(Assembly.GetExecutingAssembly().Location);
+                InFaceMaxtoCode.started = InFaceMaxtoCode.C______(num2, num3);
+            }
+            else
+            {
+                //一堆垃圾代码，报告启动错误信息的。
+            }
+        }
+ 
+
+从代码里面我们看得到InFaceMaxtoCode.Startup 正常启动后，在整个程序集中只会运行一次。
+
+关键函数是 运行库的MainDLL，这个函数有两个参数，一个是运行库的句柄，一个是程序集的句柄。这个句柄实际上就是程序在内存中加载的位置。MaxtoCode加密后的程序都是对齐到0x1000的。
+
+今天就到这里吧。
+
