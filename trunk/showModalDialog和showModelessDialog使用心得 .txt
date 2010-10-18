@@ -1,0 +1,340 @@
+一、showModalDialog和showModelessDialog有什么不同？
+　　showModalDialog：被打开后就会始终保持输入焦点。除非对话框被关闭，否则用户无法切换到主窗口。类似alert的运行效果。
+　　showModelessDialog：被打开后，用户可以随机切换输入焦点。对主窗口没有任何影响(最多是被挡住一下而以。:P)
+
+二、怎样才让在showModalDialog和showModelessDialog的超连接不弹出新窗口？
+　　在被打开的网页里加上<base target="_self">就可以了。这句话一般是放在<html>和<body>之间的。
+
+三、怎样才刷新showModalDialog和showModelessDialog里的内容？
+　　在showModalDialog和showModelessDialog里是不能按F5刷新的，又不能弹出菜单。这个只能依靠javascript了，以下是相关代码：
+
+<body onkeydown="if (event.keyCode==116){reload.click()}">
+<a id="reload" href="filename.htm" style="display:none">reload...</a>
+
+　　将filename.htm替换成网页的名字然后将它放到你打开的网页里，按F5就可以刷新了，注意，这个要配合<base target="_self">使用，不然你按下F5会弹出新窗口的。
+
+注意:如果想当访问的时候自动刷新,可以在被打开得页面,设置一个记录变量,当被打开模态窗口得时候,变量至1,然后使用上述方法刷新模态窗口,当关闭窗口得时候,变量至0.
+
+四、如何用javascript关掉showModalDialog(或showModelessDialog)打开的窗口。
+　　<input type="button" value="关闭" onclick="window.close()">
+　　也要配合<base target="_self">，不然会打开一个新的IE窗口，然后再关掉的。
+
+五、showModalDialog和showModelessDialog数据传递技巧。
+　　(作者语：本来想用一问一答形式来写的，但是我想不出这个怎么问，所以只好这样了。)
+　　这个东西比较麻烦，我改了好几次了不是没办法说明白(语文水平越来越差了)，只好用个例子说明了。
+　　例子：
+　　　　现在需要在一个showModalDialog(或showModelessDialog)里读取或设置一个变量var_name
+
+　　　　　　一般的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",var_name)
+　　　　　　　　//传递var_name变量
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments)//读取var_name变量
+　　　　　　　　window.dialogArguments="oyiboy"//设置var_name变量
+　　　　这种方式是可以满足的，但是当你想在操作var_name同时再操作第二个变理var_id时呢？就无法再进行操作了。这就是这种传递方式的局限性。
+　　　　
+　　　　　　以下是我建议使用的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",window)
+　　　　　　　　//不管要操作什么变量，只直传递主窗口的window对象
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments.var_name)//读取var_name变量
+　　　　　　　　window.dialogArguments.var_name="oyiboy"//设置var_name变量
+
+　　　　　　　　同时我也可以操作var_id变量
+　　　　　　　　alert(window.dialogArguments.var_id)//读取var_id变量
+　　　　　　　　window.dialogArguments.var_id="001"//设置var_id变量
+
+　　　　　　　　同样还可以对主窗口的任何对象进行操作，如form对象里的元素。
+　　　　　　　　window.dialogArguments.form1.index1.value="这是在设置index1元素的值"
+
+六、多个showModelessDialog的相互操作。
+　　因为光说很费劲，我就偷点懒，直接用代码来说了，如果不明白的话那就直接来信(oyiboy#163.net(使用时请将#改成@))问我吧。
+
+　　以下代码的主要作用是在一个showModelessDialog里移动别一个showModelessDialog的位置。
+
+　　主文件的部份js代码。
+　　var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"） //打开控制窗口
+　　var s2=showModelessDialog('about:blank',window,"dialogTop:200px;dialogLeft:300px"）　　//打开被控制窗口
+
+　　控制.htm的部份代码。
+　　<script>
+　　　　//操作位置数据，因为窗口的位置数据是"xxxpx"方式的，所以需要这样的一个特殊操作函数。
+ function countNumber(A_strNumber,A_strWhatdo)
+ {
+  A_strNumber=A_strNumber.replace('px','')
+  A_strNumber-=0
+  switch(A_strWhatdo)
+  {
+  case "-":A_strNumber-=10;break;
+  case "+":A_strNumber+=10;break;
+  }
+  return A_strNumber + "px"
+ }
+　　</script>
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'-')" value="上移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'-')" value="左移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'+')" value="右移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'+')" value="下移">
+
+　　以上关键部份是：
+　　　　窗口命名方式：var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"）
+　　　　变量访问方式：window.dialogArguments.s2.dialogTop
+
+　　这个例子只是现实showModelessDialog与showModelessDialog之间的位置操作功能，通过这个原理，在showModelessDialog之间相互控制各自的显示页面，传递变量和数据等。这要看各位的发挥了。
+
+ 
+
+一、showModalDialog和showModelessDialog有什么不同？
+　　showModalDialog：被打开后就会始终保持输入焦点。除非对话框被关闭，否则用户无法切换到主窗口。类似alert的运行效果。
+　　showModelessDialog：被打开后，用户可以随机切换输入焦点。对主窗口没有任何影响(最多是被挡住一下而以。:P)
+
+二、怎样才让在showModalDialog和showModelessDialog的超连接不弹出新窗口？
+　　在被打开的网页里加上<base target="_self">就可以了。这句话一般是放在<html>和<body>之间的。
+
+三、怎样才刷新showModalDialog和showModelessDialog里的内容？
+　　在showModalDialog和showModelessDialog里是不能按F5刷新的，又不能弹出菜单。这个只能依靠javascript了，以下是相关代码：
+
+<body onkeydown="if (event.keyCode==116){reload.click()}">
+<a id="reload" href="filename.htm" style="display:none">reload...</a>
+
+　　将filename.htm替换成网页的名字然后将它放到你打开的网页里，按F5就可以刷新了，注意，这个要配合<base target="_self">使用，不然你按下F5会弹出新窗口的。
+
+注意:如果想当访问的时候自动刷新,可以在被打开得页面,设置一个记录变量,当被打开模态窗口得时候,变量至1,然后使用上述方法刷新模态窗口,当关闭窗口得时候,变量至0.
+
+四、如何用javascript关掉showModalDialog(或showModelessDialog)打开的窗口。
+　　<input type="button" value="关闭" onclick="window.close()">
+　　也要配合<base target="_self">，不然会打开一个新的IE窗口，然后再关掉的。
+
+五、showModalDialog和showModelessDialog数据传递技巧。
+　　(作者语：本来想用一问一答形式来写的，但是我想不出这个怎么问，所以只好这样了。)
+　　这个东西比较麻烦，我改了好几次了不是没办法说明白(语文水平越来越差了)，只好用个例子说明了。
+　　例子：
+　　　　现在需要在一个showModalDialog(或showModelessDialog)里读取或设置一个变量var_name
+
+　　　　　　一般的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",var_name)
+　　　　　　　　//传递var_name变量
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments)//读取var_name变量
+　　　　　　　　window.dialogArguments="oyiboy"//设置var_name变量
+　　　　这种方式是可以满足的，但是当你想在操作var_name同时再操作第二个变理var_id时呢？就无法再进行操作了。这就是这种传递方式的局限性。
+　　　　
+　　　　　　以下是我建议使用的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",window)
+　　　　　　　　//不管要操作什么变量，只直传递主窗口的window对象
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments.var_name)//读取var_name变量
+　　　　　　　　window.dialogArguments.var_name="oyiboy"//设置var_name变量
+
+　　　　　　　　同时我也可以操作var_id变量
+　　　　　　　　alert(window.dialogArguments.var_id)//读取var_id变量
+　　　　　　　　window.dialogArguments.var_id="001"//设置var_id变量
+
+　　　　　　　　同样还可以对主窗口的任何对象进行操作，如form对象里的元素。
+　　　　　　　　window.dialogArguments.form1.index1.value="这是在设置index1元素的值"
+
+六、多个showModelessDialog的相互操作。
+　　因为光说很费劲，我就偷点懒，直接用代码来说了，如果不明白的话那就直接来信(oyiboy#163.net(使用时请将#改成@))问我吧。
+
+　　以下代码的主要作用是在一个showModelessDialog里移动别一个showModelessDialog的位置。
+
+　　主文件的部份js代码。
+　　var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"） //打开控制窗口
+　　var s2=showModelessDialog('about:blank',window,"dialogTop:200px;dialogLeft:300px"）　　//打开被控制窗口
+
+　　控制.htm的部份代码。
+　　<script>
+　　　　//操作位置数据，因为窗口的位置数据是"xxxpx"方式的，所以需要这样的一个特殊操作函数。
+ function countNumber(A_strNumber,A_strWhatdo)
+ {
+  A_strNumber=A_strNumber.replace('px','')
+  A_strNumber-=0
+  switch(A_strWhatdo)
+  {
+  case "-":A_strNumber-=10;break;
+  case "+":A_strNumber+=10;break;
+  }
+  return A_strNumber + "px"
+ }
+　　</script>
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'-')" value="上移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'-')" value="左移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'+')" value="右移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'+')" value="下移">
+
+　　以上关键部份是：
+　　　　窗口命名方式：var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"）
+　　　　变量访问方式：window.dialogArguments.s2.dialogTop
+
+　　这个例子只是现实showModelessDialog与showModelessDialog之间的位置操作功能，通过这个原理，在showModelessDialog之间相互控制各自的显示页面，传递变量和数据等。这要看各位的发挥了。
+
+ 
+
+一、showModalDialog和showModelessDialog有什么不同？
+　　showModalDialog：被打开后就会始终保持输入焦点。除非对话框被关闭，否则用户无法切换到主窗口。类似alert的运行效果。
+　　showModelessDialog：被打开后，用户可以随机切换输入焦点。对主窗口没有任何影响(最多是被挡住一下而以。:P)
+
+二、怎样才让在showModalDialog和showModelessDialog的超连接不弹出新窗口？
+　　在被打开的网页里加上<base target="_self">就可以了。这句话一般是放在<html>和<body>之间的。
+
+三、怎样才刷新showModalDialog和showModelessDialog里的内容？
+　　在showModalDialog和showModelessDialog里是不能按F5刷新的，又不能弹出菜单。这个只能依靠javascript了，以下是相关代码：
+
+<body onkeydown="if (event.keyCode==116){reload.click()}">
+<a id="reload" href="filename.htm" style="display:none">reload...</a>
+
+　　将filename.htm替换成网页的名字然后将它放到你打开的网页里，按F5就可以刷新了，注意，这个要配合<base target="_self">使用，不然你按下F5会弹出新窗口的。
+
+注意:如果想当访问的时候自动刷新,可以在被打开得页面,设置一个记录变量,当被打开模态窗口得时候,变量至1,然后使用上述方法刷新模态窗口,当关闭窗口得时候,变量至0.
+
+四、如何用javascript关掉showModalDialog(或showModelessDialog)打开的窗口。
+　　<input type="button" value="关闭" onclick="window.close()">
+　　也要配合<base target="_self">，不然会打开一个新的IE窗口，然后再关掉的。
+
+五、showModalDialog和showModelessDialog数据传递技巧。
+　　(作者语：本来想用一问一答形式来写的，但是我想不出这个怎么问，所以只好这样了。)
+　　这个东西比较麻烦，我改了好几次了不是没办法说明白(语文水平越来越差了)，只好用个例子说明了。
+　　例子：
+　　　　现在需要在一个showModalDialog(或showModelessDialog)里读取或设置一个变量var_name
+
+　　　　　　一般的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",var_name)
+　　　　　　　　//传递var_name变量
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments)//读取var_name变量
+　　　　　　　　window.dialogArguments="oyiboy"//设置var_name变量
+　　　　这种方式是可以满足的，但是当你想在操作var_name同时再操作第二个变理var_id时呢？就无法再进行操作了。这就是这种传递方式的局限性。
+　　　　
+　　　　　　以下是我建议使用的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",window)
+　　　　　　　　//不管要操作什么变量，只直传递主窗口的window对象
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments.var_name)//读取var_name变量
+　　　　　　　　window.dialogArguments.var_name="oyiboy"//设置var_name变量
+
+　　　　　　　　同时我也可以操作var_id变量
+　　　　　　　　alert(window.dialogArguments.var_id)//读取var_id变量
+　　　　　　　　window.dialogArguments.var_id="001"//设置var_id变量
+
+　　　　　　　　同样还可以对主窗口的任何对象进行操作，如form对象里的元素。
+　　　　　　　　window.dialogArguments.form1.index1.value="这是在设置index1元素的值"
+
+六、多个showModelessDialog的相互操作。
+　　因为光说很费劲，我就偷点懒，直接用代码来说了，如果不明白的话那就直接来信(oyiboy#163.net(使用时请将#改成@))问我吧。
+
+　　以下代码的主要作用是在一个showModelessDialog里移动别一个showModelessDialog的位置。
+
+　　主文件的部份js代码。
+　　var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"） //打开控制窗口
+　　var s2=showModelessDialog('about:blank',window,"dialogTop:200px;dialogLeft:300px"）　　//打开被控制窗口
+
+　　控制.htm的部份代码。
+　　<script>
+　　　　//操作位置数据，因为窗口的位置数据是"xxxpx"方式的，所以需要这样的一个特殊操作函数。
+ function countNumber(A_strNumber,A_strWhatdo)
+ {
+  A_strNumber=A_strNumber.replace('px','')
+  A_strNumber-=0
+  switch(A_strWhatdo)
+  {
+  case "-":A_strNumber-=10;break;
+  case "+":A_strNumber+=10;break;
+  }
+  return A_strNumber + "px"
+ }
+　　</script>
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'-')" value="上移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'-')" value="左移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'+')" value="右移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'+')" value="下移">
+
+　　以上关键部份是：
+　　　　窗口命名方式：var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"）
+　　　　变量访问方式：window.dialogArguments.s2.dialogTop
+
+　　这个例子只是现实showModelessDialog与showModelessDialog之间的位置操作功能，通过这个原理，在showModelessDialog之间相互控制各自的显示页面，传递变量和数据等。这要看各位的发挥了。
+
+一、showModalDialog和showModelessDialog有什么不同？
+　　showModalDialog：被打开后就会始终保持输入焦点。除非对话框被关闭，否则用户无法切换到主窗口。类似alert的运行效果。
+　　showModelessDialog：被打开后，用户可以随机切换输入焦点。对主窗口没有任何影响(最多是被挡住一下而以。:P)
+
+二、怎样才让在showModalDialog和showModelessDialog的超连接不弹出新窗口？
+　　在被打开的网页里加上<base target="_self">就可以了。这句话一般是放在<html>和<body>之间的。
+
+三、怎样才刷新showModalDialog和showModelessDialog里的内容？
+　　在showModalDialog和showModelessDialog里是不能按F5刷新的，又不能弹出菜单。这个只能依靠javascript了，以下是相关代码：
+
+<body onkeydown="if (event.keyCode==116){reload.click()}">
+<a id="reload" href="filename.htm" style="display:none">reload...</a>
+
+　　将filename.htm替换成网页的名字然后将它放到你打开的网页里，按F5就可以刷新了，注意，这个要配合<base target="_self">使用，不然你按下F5会弹出新窗口的。
+
+注意:如果想当访问的时候自动刷新,可以在被打开得页面,设置一个记录变量,当被打开模态窗口得时候,变量至1,然后使用上述方法刷新模态窗口,当关闭窗口得时候,变量至0.
+
+四、如何用javascript关掉showModalDialog(或showModelessDialog)打开的窗口。
+　　<input type="button" value="关闭" onclick="window.close()">
+　　也要配合<base target="_self">，不然会打开一个新的IE窗口，然后再关掉的。
+
+五、showModalDialog和showModelessDialog数据传递技巧。
+　　(作者语：本来想用一问一答形式来写的，但是我想不出这个怎么问，所以只好这样了。)
+　　这个东西比较麻烦，我改了好几次了不是没办法说明白(语文水平越来越差了)，只好用个例子说明了。
+　　例子：
+　　　　现在需要在一个showModalDialog(或showModelessDialog)里读取或设置一个变量var_name
+
+　　　　　　一般的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",var_name)
+　　　　　　　　//传递var_name变量
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments)//读取var_name变量
+　　　　　　　　window.dialogArguments="oyiboy"//设置var_name变量
+　　　　这种方式是可以满足的，但是当你想在操作var_name同时再操作第二个变理var_id时呢？就无法再进行操作了。这就是这种传递方式的局限性。
+　　　　
+　　　　　　以下是我建议使用的传递方式：
+　　　　　　　　window.showModalDialog("filename.htm",window)
+　　　　　　　　//不管要操作什么变量，只直传递主窗口的window对象
+　　　　　　在showModalDialog(或showModelessDialog)读取和设置时：
+　　　　　　　　alert(window.dialogArguments.var_name)//读取var_name变量
+　　　　　　　　window.dialogArguments.var_name="oyiboy"//设置var_name变量
+
+　　　　　　　　同时我也可以操作var_id变量
+　　　　　　　　alert(window.dialogArguments.var_id)//读取var_id变量
+　　　　　　　　window.dialogArguments.var_id="001"//设置var_id变量
+
+　　　　　　　　同样还可以对主窗口的任何对象进行操作，如form对象里的元素。
+　　　　　　　　window.dialogArguments.form1.index1.value="这是在设置index1元素的值"
+
+六、多个showModelessDialog的相互操作。
+　　因为光说很费劲，我就偷点懒，直接用代码来说了，如果不明白的话那就直接来信(oyiboy#163.net(使用时请将#改成@))问我吧。
+
+　　以下代码的主要作用是在一个showModelessDialog里移动别一个showModelessDialog的位置。
+
+　　主文件的部份js代码。
+　　var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"） //打开控制窗口
+　　var s2=showModelessDialog('about:blank',window,"dialogTop:200px;dialogLeft:300px"）　　//打开被控制窗口
+
+　　控制.htm的部份代码。
+　　<script>
+　　　　//操作位置数据，因为窗口的位置数据是"xxxpx"方式的，所以需要这样的一个特殊操作函数。
+ function countNumber(A_strNumber,A_strWhatdo)
+ {
+  A_strNumber=A_strNumber.replace('px','')
+  A_strNumber-=0
+  switch(A_strWhatdo)
+  {
+  case "-":A_strNumber-=10;break;
+  case "+":A_strNumber+=10;break;
+  }
+  return A_strNumber + "px"
+ }
+　　</script>
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'-')" value="上移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'-')" value="左移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogLeft=countNumber(window.dialogArguments.s2.dialogLeft,'+')" value="右移">
+　　<input type="button" onclick="window.dialogArguments.s2.dialogTop=countNumber(window.dialogArguments.s2.dialogTop,'+')" value="下移">
+
+　　以上关键部份是：
+　　　　窗口命名方式：var s1=showModelessDialog('控制.htm',window,"dialogTop:1px;dialogLeft:1px"）
+　　　　变量访问方式：window.dialogArguments.s2.dialogTop
+
+　　这个例子只是现实showModelessDialog与showModelessDialog之间的位置操作功能，通过这个原理，在showModelessDialog之间相互控制各自的显示页面，传递变量和数据等。这要看各位的发挥了。
+
