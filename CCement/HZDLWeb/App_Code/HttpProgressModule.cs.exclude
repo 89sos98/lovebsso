@@ -1,0 +1,52 @@
+#region License and Copyright
+
+/*
+ * Copyright (c) 2007-2008 by Hornow Science & Technology Co.,Ltd
+ * All rights reserved.
+ */
+
+#endregion
+
+using System;
+using System.Web;
+using Hornow.Common.Logging;
+using Hornow.Horn.Security.Config;
+
+namespace Hornow.Horn.Security.Web
+{
+    public class HttpProgressModule : IHttpModule
+    {
+        /// <summary>
+        /// logger
+        /// </summary>
+        private static readonly ILog log = LogManager.GetLogger(typeof(HttpProgressModule));
+
+        public void Dispose()
+        {
+        }
+
+        public void Init(HttpApplication context)
+        {
+            context.BeginRequest += new EventHandler(this.OnEnter);
+        }
+
+        private void OnEnter(object sender, EventArgs e)
+        {
+            HttpApplication application = (HttpApplication)sender;
+            HttpContext context = application.Context;
+            HttpRequest req = application.Request;
+
+            string upperRowUrl = req.RawUrl.ToUpperInvariant();
+            if (upperRowUrl.Contains("AdvProgressBar.aspx".ToUpperInvariant()))
+            {
+                if (context.Request["type"] == "progress")
+                {
+                    string loginGuid = context.Request[SecurityConstants.HN_LOGIN_GUID];
+                    context.Response.Write(HttpLoginModule.GetProgress(context, loginGuid));
+                }
+
+                application.CompleteRequest();
+            }
+        }
+    }
+}
