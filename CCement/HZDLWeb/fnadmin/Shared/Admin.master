@@ -1,0 +1,36 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="fnadmin_Shared_Admin" %>
+
+<%@ Register Src="Header.ascx" TagName="Header" TagPrefix="uc1" %>
+<%@ Register Src="Lefter.ascx" TagName="Lefter" TagPrefix="uc2" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <%=ConfigurationManager.AppSettings["siteName"]%>后台管理</title>
+    <link rel="Stylesheet" href="../../resource/css/admin.css" />
+
+    <script type="text/javascript" src="../../resource/js/JScript.js"></script>
+
+</head>
+<body>
+    <form id="form1" runat="server">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td colspan="2">
+                <uc1:Header ID="Header1" runat="server" />
+            </td>
+        </tr>
+        <tr>
+            <td width="15%" valign="top">
+                <uc2:Lefter ID="Lefter1" runat="server" />
+                &nbsp;
+            </td>
+            <td width="80%" valign="top" id="tdmain">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

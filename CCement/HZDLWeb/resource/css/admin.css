@@ -1,0 +1,16 @@
+/* CSS Document */
+body { background:#C8E5FB; font-size: 12px; margin:0px; color:Black;}
+a {color:#000000;font-size:9pt;text-decoration:none;}
+a:hover{ color:Red;}
+.tableBorder {background-color:#FFFFFF;border:1px solid #183789;width:98%; background-color:#F1F3F5}
+.titleTd  {background-image:url(../image/admin/admintbg.gif);color:#FFFFFF;font-size:12px;font-weight:bold; text-align:left;}
+.tableBorder td{ border-bottom:dashed 1px #cccccc;}
+
+.white {color: #FFFFFF}
+
+
+
+.tbox{ border:solid 1px #cccccc; width:200px; height:20px; line-height:20px; font-weight:bold; letter-spacing:1px; color:#555555;}
+.tboxL{ width:420px;}
+.tboxS{ border:solid 1px #cccccc; width:150px; height:18px; line-height:18px; font-weight:bold; letter-spacing:1px; color:#555555;}
+.sel{ border:solid 1px #cccccc; height:20px; line-height:20px;}
