@@ -10,11 +10,14 @@
 using System;
 using System.Web;
 using System.IO;
+using log4net;
 
 namespace CCement
 {
     public class HttpErrorModule : IHttpModule
     {
+        private readonly ILog log = LogManager.GetLogger(typeof(HttpErrorModule));
+
         public const string HttpErrorWrapper = "HttpErrorWrapper";
 
         public void Dispose()
@@ -50,6 +53,7 @@ namespace CCement
                         //clear the error and redirect it to the error page
                         HttpContext.Current.Server.ClearError();
                         HttpContext.Current.Server.Transfer(error404Url, true);
+                        log.Error(ex.Message, ex);
                     }
                     catch (Exception exc)
                     {
