@@ -95,8 +95,33 @@ namespace CCement
     [Serializable]
     public class ErrorWrapper
     {
-        public string ErrorPage { get; set; }
-
-        public Exception ErrorException { get; set; }
+        private string errorPage;
+        public string ErrorPage
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(errorPage))
+                    return "";
+                return errorPage;
+            }
+            set
+            {
+                errorPage = value;
+            }
+        }
+        private Exception errorException;
+        public Exception ErrorException
+        {
+            get
+            {
+                if (null == errorException)
+                    return null;
+                return errorException;
+            }
+            set
+            {
+                errorException = value;
+            }
+        }
     }
 }

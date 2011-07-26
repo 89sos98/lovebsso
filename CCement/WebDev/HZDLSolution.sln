@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "HZDLWeb", "HZDLWeb\", "{0FE7A384-508B-4DD2-B060-33C4775D6A13}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
 		Debug.AspNetCompiler.VirtualPath = "/HZDLWeb"
 		Debug.AspNetCompiler.PhysicalPath = "HZDLWeb\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\HZDLWeb\"
