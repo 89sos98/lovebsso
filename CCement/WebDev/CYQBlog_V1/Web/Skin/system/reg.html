@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Space-Reg</title>
+    <style type="text/css">
+  input  {width:150px; border:1px solid #cccccc; background-color:#f5f5f5;  }
+  div  {margin-top:8px;}
+  .tdright{text-align: right; width: 80px;}
+  </style>
+</head>
+<body style="text-align: center; font: Verdana, Arial, Helvetica, sans-serif; font-size: 14px;
+    font-weight: bold; background-color: Black; color: White;">
+    <div style="width: 800px; margin-top: 100px;">
+        <h1 style="font-size: xx-large; color: #99ccff; font-style: italic; text-align: center;"
+            key="welcometospace">
+            Registry For Enter Space</h1>
+        <h3 key="inputforreg" style="margin-top: 50px;">
+            Just Input your User Name Here for Registry</h3>
+       <div style="margin:auto; text-align: center;">
+            <form method="post">
+                <input name="myAct" type="hidden" value="Reg" /><br />
+                <table width="400px">
+                    <tr>
+                        <td class="tdright">
+                            <span key="username">用户名</span>:</td>
+                        <td>
+                            <input id="txtUserName" name="txtUserName" type="text" maxlength="15" /></td>
+                        <td>
+                            <input keyvalue="checkusername" name="btnCheck" type="submit" value="checkTheUserName"
+                                style="width: 80px;" /></td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                            <span key="password">密 码</span>:</td>
+                        <td>
+                            <input name="txtPassWord" type="password" maxlength="20" size="20" /></td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                            <span key="password">重复密码</span>:
+                        </td>
+                        <td>
+                            <input name="txtPassWordAgain" type="password" maxlength="20" />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                            <span key="email">Email</span>:
+                        </td>
+                        <td>
+                            <input name="txtEmail" type="text" maxlength="40" />
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                        </td>
+                        <td>
+                            <input keyvalue="reg" name="btnReg" type="submit" value="注册" style="width: 61px;margin-left: 20px;" />
+                            <a key="login" href="/sys/login" style="text-decoration: none; color: #99ccff; font-size: 12px;
+                                margin-left: 20px;">登陆</a>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                        </td>
+                        <td colspan="2">
+                            <div id="msg">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Space-Login</title>
+    <style type="text/css">
+ input  {width:150px; border:1px solid #cccccc; background-color:#f5f5f5;  }
+  div  {margin-top:8px;}
+    .tdright{text-align: right; width: 80px;}
+  </style>
+</head>
+<body style="text-align: center; font: Verdana, Arial, Helvetica, sans-serif; font-size: 14px;
+    font-weight: bold; background-color: Black; color: White;">
+    <div style="width: 800px; margin-top: 100px;text-align:center;">
+        <h1 style="font-size: xx-large; color: #99ccff; font-style: italic; text-align: center;">
+            <label key="welcometospace">
+                Login To Enter Space</label></h1>
+        <h3 style="margin-top: 50px;">
+            <label key="inputforlogin">
+                Just Input your User Name Here for Login</label></h3>
+        <div style="margin:auto; text-align: center;">
+            <form method="post">
+                <input name="myAct" type="hidden" value="Login" />
+                <table width="280px">
+                    <tr>
+                        <td class="tdright">
+                            <span key="username">用户名</span>:</td>
+                        <td>
+                            <input id="Text1" name="txtUserName" type="text" maxlength="15" /></td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                            <span key="password">密 码</span>:</td>
+                        <td>
+                            <input name="txtPassWord" type="password" maxlength="20" size="20" /></td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                        </td>
+                        <td>
+                            <input keyvalue="login" name="btnLogin" type="submit" value="登陆" style="width: 61px;
+                                margin-left: 40px; cursor: pointer; padding-top: 2px;" />
+                            <a key="reg" href="/sys/reg" style="text-decoration: none; color: #99ccff; font-size: 12px;
+                                margin-left: 20px;">马上注册</a>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdright">
+                        </td>
+                        <td colspan="2">
+                            <div id="msg">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

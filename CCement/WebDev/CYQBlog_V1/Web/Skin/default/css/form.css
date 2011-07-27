@@ -1,0 +1,49 @@
+/*----- Button -----*/
+.Button{}
+.Button_Style{}
+/*----- Button_End -----*/
+
+/*----- InputBox -----*/
+.TextField{}
+.TextField_Style{ border:1px solid #cccccc; background-color:#f5f5f5;}
+.TextArea{}
+.TextArea_Style{ border:1px solid #cccccc;width:580px;height:150px;}
+.TextSelect{}
+.TextSelect_Style{}
+/*----- InputBox_End -----*/
+
+/*----- Tag -----*/
+.Tag_Body{}
+.Tag_Left{ height:100%; width:90px; float:left; margin:2px; padding-top:3px;text-align:right; color:#aaaaaa;}
+.Tag_Right{ margin:2px; margin-left:95px;}
+.Tag_Form{}
+.Tag_Notice{margin:2px 0px 2px 0px; margin-left:0px !important; margin-left:3px; color:#888888;}
+.Tag_Content{ background-color:#ffffdd; margin-left:0px !important; margin-left:3px; height:100%; overflow:auto; padding:5px;}
+	.Tag_Content a{ margin:3px; padding:3px; line-height:18px;}
+	.Tag_Content a:hover{ color:#ff6600; margin:3px; padding:3px;}
+/*----- Tag_End -----*/
+
+/*----- Link -----*/
+a:link,a:visited{text-decoration:none;color:#333333;}
+a:hover{text-decoration:underline;color:#666666;}
+
+.Link_Bold:link{text-decoration:none;color:#888888; font-weight:bold;}
+.Link_Bold:visited{text-decoration:none;color:#888888; font-weight:bold;}
+.Link_Bold:hover{text-decoration:underline;color:#333333; font-weight:bold;}
+
+.Link_Text_Title:link{text-decoration:none;color:#888888; font-weight:bold; font-size:14px;}
+.Link_Text_Title:visited{text-decoration:none;color:#888888; font-weight:bold; font-size:14px;}
+.Link_Text_Title:hover{text-decoration:underline;color:#333333; font-weight:bold; font-size:14px;}
+
+/*----- Link_End -----*/
+
+/*----- Text -----*/
+.Text_Ps{ color:#888888;}
+.Text_Ps2{ color:#aaaaaa;}
+.Text_En{ font-family:Arial, Helvetica, sans-serif;}
+.Text_Member_Name{ color:#333333; font-size:12px;}
+.Text_Date{ color:#aaaaaa;}
+.Text_No{ color:#aaaaaa; font-size:12px;}
+.Text_14{ font-size:14px; line-height:150%;}
+/*----- Text_End -----*/
+.Text_U{font:Verdana, Arial, Helvetica, sans-serif; color:#FF9900; font-weight:bold;}

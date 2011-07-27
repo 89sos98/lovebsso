@@ -1,0 +1,224 @@
+/*----- Overall -----*/
+Body{ height:100%; margin:0px; padding:0px;}
+Form{margin:0px; padding:0px; border:0px;}
+/*----- Overall_End -----*/
+
+/*----- Body_Head -----*/
+		.Menu_button{margin-left:25px;}
+			.Menu_button ul{ margin:0px; padding:0px; list-style-type:none;}
+				.Menu_button li{ float:left; padding:8px 15px 0px 15px;}
+.Body_Middle_Middle2{margin:0px 10px 0px 220px !important; margin:0px 10px 0px 217px; height:100%;}
+/*----- Body_Middle_End -----*/
+
+
+
+/*----- Box -----*/
+.Box_Body{ margin-top:15px;}
+
+	.Box_Title{}
+		.Box_Title_Left{ margin-right:0px !important; margin-right:-3px; width:4px; height:24px; float:left;}
+		.Box_Title_Middle{ height:24px; margin:0px 4px 0px 4px !important; margin:0px 1px 0px 1px;}
+		.Box_Title_Right{margin-left:0px !important; margin-left:-3px; width:4px; height:24px; float:right;}
+
+			.Box_Title_Text{ float:left; width:auto; margin:6px 0px 0px 5px !important; margin:6px 0px 0px 2px;}
+			.Box_Title_Button{ float:right; width:auto; margin:4px 5px 0px 0px !important; margin:4px 2px 0px 0px;}
+
+	.Box_Middle{ padding:8px 8px 5px 8px !important; padding:8px 8px -15px 8px;}
+	.Box_Bottom{}
+		.Box_Bottom_Left{ margin-right:0px !important; margin-right:-3px; width:4px; height:5px; float:left;}
+		.Box_Bottom_Middle{ height:5px; margin:0px 4px 0px 4px !important; margin:0px 1px 0px 1px;}
+		.Box_Bottom_Right{ margin-left:0px !important; margin-left:-3px; width:4px; height:5px; float:right;}
+/*----- Box_End -----*/
+
+
+/*----- List -----*/
+/*-- Diary_List --*/
+.Diary_List{padding:8px 8px 8px 5px; height:100%; overflow:auto;}
+	.Diary_List ul{ margin:0px; padding:0px; list-style-type:none;}
+		.Diary_List li{ margin-bottom:15px !important; margin-bottom:12px;}
+.Diary_Body{}
+	.Diary_Title{}
+		.Diary_Title_Left{ margin-right:0px !important; margin-right:-3px; width:0px; height:26px; float:left;}
+		.Diary_Title_Middle{ height:26px; margin:0px 4px 0px 4px !important; margin:-14px 1px 0px 1px;}
+		.Diary_Title_Right{ margin-left:0px !important; margin-left:-3px; width:0px; height:26px; float:right;}
+
+		.Diary_Title_Text{ float:left; width:auto; margin:6px 0px 0px 5px !important; margin:6px 0px 0px 2px;}
+		.Diary_Title_Date{ float:right; width:auto; margin:6px 8px 0px 0px !important; margin:6px 4px 0px 0px;}
+	.Diary_Content{ padding:8px 10px 5px 10px;}
+	.Diary_More{ padding:0px 10px 8px 10px;}
+	.Diary_Line{ margin:0px 10px 0px 10px; height:1px;overflow:hidden;}
+
+.Diary_Bottom{ padding:7px 10px 5px 10px; height:100%; overflow:auto;}
+.Diary_Bottom_Left{ float:left;}
+.Diary_Bottom_Right{ float:right;}
+/*-- Diary_List_End --*/
+/*-- Text_List --*/
+.Text_Button_List{ margin:0px 6px 0px 6px;}
+	.Text_Button_List ul{ margin:0px; padding:0px; list-style-type:none;}
+		.Text_Button_List li{ padding:3px 5px 3px 5px !important; padding:3px 5px 4px 5px;}
+
+.Text_List{ margin:0px 3px 0px 3px;}
+	.Text_List ul{ margin:0px; padding:0px; list-style-type:none;}
+		.Text_List li{ padding:0px 5px 0px 5px;}
+		
+.Text_List2{ margin:0px 3px 0px 3px;}
+	.Text_List2 ul{ margin:0px; padding:0px; list-style-type:none;}
+		.Text_List2 li{ padding:2px 5px 2px 5px;}
+/*-- Text_List_End --*/
+
+/*-- Picture_List --*/
+.Picture_List{ margin-left:auto; margin-right:auto;height:100%; overflow:auto;}
+	.Picture_List ul{ margin:0px; padding:0px; list-style-type:none;}
+		.Picture_List li{ float:left; margin:2px 4px 2px 3px !important; margin:2px 2px 2px 3px; }
+/*-- Picture_List_End --*/
+
+/*----- List_End -----*/
+
+/*----- Picture -----*/
+.Picture{ padding:3px; width:100px; height:131px;}
+/*-- Member_Box --*/
+.Member_Box{}
+.Member_Picture{ padding:3px; width:48px; height:63px;}
+.Member_Name{}
+/*-- Member_Box_End --*/
+/*----- Picture_End -----*/
+
+/*----- Line -----*/
+.Line{ height:1px; overflow:hidden;}
+/*----- Line_End -----*/
+
+/*----- Button -----*/
+.Button_Icon_Right{}
+.Button_Sec_Menu{ padding:7px 10px 4px 10px;}
+
+
+/*----- Button -----*/
+
+/*----- Material -----*/
+.Material_Name{ padding-top:3px !important;padding-top:0px;}
+.Material_Text{ padding:10px 0px 10px 25px;}
+.Material_Button{ padding:10px 10px 10px 10px; height:80px;}
+.Material_Button_Left{ float:left; width:auto;}
+.Material_Button_Right{ float:right; width:auto;}
+.Material_Button_Icon{margin-top:4px;}
+.Material_Mail{ padding:5px 10px 5px 10px !important; padding:0px 10px 5px 10px;}
+.Material_Text2_Title{ padding:10px 0px 0px 10px;}
+.Material_Text2{ padding:0px 0px 10px 10px;}
+/*----- Material_End -----*/
+
+/*----- PageNo -----*/
+.PageNo{ margin-top:8px !important; margin-top:-14px;}
+	.PageNo ul{ margin:0px; padding:0px; list-style-type:none;}
+		.PageNo li{ float:left; margin:3px;}
+.PageNo_Bottom{clear:both;margin-bottom:-28px !important;margin-bottom:-20px;}
+.PageNo_Button{padding-top:2px;}
+.PageNo_Box{ width:16px; height:16px; padding:1px 0px 0px 1px !important; padding:1px 0px 0px 0px;}
+.PageNo_Box_Selects{ width:16px; height:16px; padding:1px 0px 0px 1px !important; padding:1px 0px 0px 0px;}
+/*----- PageNo_End -----*/
+
+/*----- Album -----*/
+.Album_Loading{ height:16px;}
+.Album_List{}
+	.Album_List ul{ margin:0px; padding:0px; list-style-type:none; display:inline;}
+		.Album_List li{ margin:10px; height:104px; width:120px; float:left; display:block;}
+		.Album_List li a{width:auto !important; width:105px; height:88px; display: block; padding: 8px; text-decoration: none;}
+		.Album_List_Picture{ width:60px; height:70px;}
+
+.Picture_Title{ margin-top:5px; height:50px;}
+	.Picture_Title_Left{ width:160px; float:left;}
+	.Picture_Title_Middle{ width:422px; float:left;}
+		.Picture_Title_Text{ padding:5px;}
+		.Picture_Title_Author{}
+	.Picture_Title_Right{ width:160px; float:right; padding-top:18px;}
+
+.Picture_Show{ margin-left:auto; margin-right:auto;width:688px;}
+.Picture_Body{ width:688px; height:450px;}
+.Picture_Botton{ padding-top:10px;}
+.Picture_Botton_Pre{ width:34px; height:34px; margin-right:5px;}
+.Picture_Botton_Next{ width:34px; height:34px; margin-left:5px;}
+.Picture_SmallBotton_Pre{ width:26px; height:26px; margin-right:5px;}
+.Picture_SmallBotton_Next{ width:26px; height:26px; margin-left:5px;}
+/*----- Album_End -----*/
+
+/*----- Article -----*/
+.Article_Title{ margin-top:5px; height:50px;}
+	.Article_Title_Text{ padding:5px;}
+	.Article_Title_Date{}
+.Article_Text{padding:0px 10px 20px 10px;}
+.Article_Bottom{ padding-top:10px;}
+/*----- Article_End -----*/
+
+/*----- Button -----*/
+.Button{}
+/*----- Button_End -----*/
+
+/*----- Template -----*/
+.Template_List{ height:100%; overflow:auto;}
+	.Template_List ul{ margin:0px; padding:0px; list-style-type:none; display:inline;}
+		.Template_List li{padding-top:10px; margin:10px; height:120px; width:120px; float:left; display:block;}
+		.Template_List_Picture{ width:87px; height:87px;}
+		
+.Template_Title{ height:100%; overflow:auto; height:30px; margin:10px 0px 10px 0px !important; margin:15px 0px 10px 0px;}
+.Template_Type{ height:100%; overflow:auto; margin-left:30px;}
+	.Template_Type ul{ margin:0px; padding:0px; list-style-type:none;}
+		.Template_Type li{ float:left; display: block; margin:0px 2px 0px 2px;cursor:pointer;height:21px; padding-top:5px;}
+		.Template_Type li a{ padding:6px 12px 5px 12px !important; padding:10px 12px 10px 12px; height:100%; overflow:auto;}
+		.Template_Type_Selects{ padding:0px 12px 0px 12px; height:100%; overflow:auto;}
+
+/*----- Template_End -----*/
+
+/*----- Form -----*/
+.Form_List{ padding:0px 10px 0px 10px;}
+	.Form_List ul{ margin:0px; padding:0px; list-style-type:none; display:inline;}
+		.Form_List li{ display:block;}
+		.Form_Suggest{ padding:5px 10px 4px 10px;}
+		.Form_Notice{margin:0px; padding:0px; height:100%; overflow:auto;}
+			.Form_Notice_List{}
+				.Form_Notice_List ul{ margin:0px; padding:0px; list-style-type:none;}
+				.Form_Notice_List li{margin:0px !important;margin:0px 0px 0px -16px; padding:3px;}
+		.Form_Notice_Left{ float:left; width:300px;}
+		.Form_Notice_Right{ float:right; width:300px; height:150px;}
+	.Form_Title{ padding-bottom:3px;}
+	.Form_Spacing{ height:2px;}
+	.Form_Volume_List{ height:100%; overflow:auto;}
+	.Form_Volume_List ul{ margin:0px; padding:0px; list-style-type:0px;}
+		.Form_Volume_List li{ display:block; float:left; width:150px;}
+
+/*----- Form_End -----*/
+
+/*----- ClassList -----*/
+
+.ClassList{ margin:15px 0px 15px 0px !important; margin:15px 0px 30px 0px; padding:20px 10px 15px 10px !important;padding:0px 10px 15px 10px; height:100%; overflow:auto;}
+	.ClassList ul{ margin:0px; padding:0px; list-style-type:none;}
+	.ClassList li{ margin-bottom:8px !important; height:100%; overflow:auto;}
+		.ClassList_No{ width:20px; float:left;}
+		.ClassList_Title{ float:left;}
+		.ClassList_Date{ float:right;}
+		.ClassList_Class{ float:right; width:120px;}
+		.ClassList_Button{ float:right; margin:0px 20px 0px 0px;}
+
+/*----- ClassList_End -----*/
+
+/*----- Ad -----*/
+.Ad_Info{ height:100%; overflow:auto;}
+.Ad_Code_Left{ float:left;}
+.Ad_Code_Right{ float:left; padding:5px 0px 0px 10px; font-size:14px;}
+
+/*----- Ad_End -----*/
+
+/*----- Detail_ -----*/
+.Detail_Content_Text{ width:100%; padding:5px 0px 5px 0px !important; padding:0px;}
+		.Detail_Content_Name{ width:90px; float:left; margin:2px;}
+		.Detail_Content_Info{ float:left; margin:2px;}
+
+/*----- Detail_End -----*/
+
+/*----- RightTop_Menu -----*/
+.RightTop_Menu{position:absolute;width:100px;top:30px; right:77px; height:auto; font-family:Arial, Helvetica, sans-serif;}
+	.RightTop_Menu img{border:0px; margin:0px 5px 0px 0px; *margin:0px 5px 0px -8px; _margin:0px 5px 0px -16px;}
+	.RightTop_Menu ul{margin:0px; padding:0px; list-style:none; display:inline;}
+	.RightTop_Menu li{margin:0px; padding:0px; text-align:left;}
+	.RightTop_Menu li a{ padding:4px 10px 4px 8px; *padding:4px 0px 4px 0px; _padding:4px 10px 4px 8px ; display:block;}
+	.RightTop_Menu li a:hover{ padding:4px 10px 4px 8px; *padding:4px 0px 4px 0px; _padding:4px 10px 4px 8px ;}
+
+/*----- RightTop_Menu_End -----*/

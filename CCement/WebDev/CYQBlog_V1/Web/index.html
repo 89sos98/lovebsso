@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>如何运行本程序-指导说明</title>
+</head>
+<body>
+本程序并无明显的index.aspx或default.aspx，也无法直接运行*.ashx，因此，写此指导说明来帮助新手运行此网站.
+<hr />
+
+运行本软件，你需要使用IIS开发方式进行,配置方式如下：<br /><br />
+1：在IIS中新建一网站[xp下则修改网站属性]:<br /><br />
+a: 网站ip为:127.0.0.1 端口80<br />
+b: 网站主机头:www.mycyqdata.com<br />
+c: 添加通用映射:2003下添加通用映射,xp下添加.*映射<br />
+d: 指网站路径指定到本软件Web目录下<br /><br />
+
+2：host[C:\WINDOWS\system32\drivers\etc\hosts]中添加一条：127.0.0.1 www.mycyqdata.com<br /><br />
+
+3：项目属性中的Web项目使用IIS服务器，填写项目url:www.mycyqdata.com，并点击“创建虚拟目录”，并确认成功。<br /><br />
+
+4：直接打开ie,输入www.mycyqdata.com,即可访问<br /><br />
+
+<hr /><br /><br />
+如何调试？<br /><br />
+设置index.html为起始页，然后按F5运行，之后直接点击:<a href="/">访问首页</a> 
+</body>
+</html>

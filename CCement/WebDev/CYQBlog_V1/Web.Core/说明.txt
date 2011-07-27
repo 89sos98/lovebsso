@@ -1,0 +1,18 @@
+
+Web.Core ： 核心程序
+
+
+Config     : 一些可配置的选项
+
+ICore      : 业务类的接口,从HttpCustom基类中提取
+CoreBase   : 使用接口,并成为业务类的基类
+
+DomainFiter: 域名注册时,可以过滤一些基础的注册用户名
+
+Encode     : 整站使用的加密函数
+
+FileUpload : 整站的文件上传类
+
+UserLogin  : 用户信息处理[登陆注册退出及获取用户信息]
+
+ 

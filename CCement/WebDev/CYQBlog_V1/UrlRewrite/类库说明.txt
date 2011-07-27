@@ -1,0 +1,23 @@
+
+UrlRewrite：自定义的重写UrlRewrite。
+
+
+基础说明：
+
+所以的请求第一入口即在这里:
+
+[UrlRewrite]UrlRewrite -> 截取所有请求，分类好参数
+
+                ↓
+                
+[Module]    HttpCustom：接收参数，调用PageLoadUrl寻址页面然后加载皮肤
+
+                ↓
+    
+[Web]       ashx页面：接收参数，调用[Logic]相关类填充数据
+
+                ↓
+                
+[Module]   最后返回 HttpCustom最后生命流程，输出html
+
+ 
